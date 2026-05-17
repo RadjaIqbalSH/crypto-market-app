@@ -1,15 +1,15 @@
 import AuthTemplate from "@/components/templates/AuthTemplate";
 import React, { ReactNode } from "react";
 
-interface ILayoutLoginProps {
+interface ILayoutOTPProps {
 	children: ReactNode;
 }
 
-export default function LayoutLogin(props: ILayoutLoginProps) {
+export default function LayoutOTP(props: ILayoutOTPProps) {
 	// props
 	const { children } = props;
 
 	return (
-		<AuthTemplate image="/images/bg-laptop.webp">{children}</AuthTemplate>
+		<AuthTemplate image="/images/bg-phone.webp">{children}</AuthTemplate>
 	);
 }

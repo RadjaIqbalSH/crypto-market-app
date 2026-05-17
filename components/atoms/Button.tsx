@@ -1,52 +1,61 @@
-// components/atoms/Button.tsx
-
-"use client";
-
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
 import { LoaderCircle } from "lucide-react";
-import { Text } from "@/components/atoms/Text";
 import { cn } from "@/lib/cn";
+
+export type TButtonVariant = "primary" | "ghost";
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	children: ReactNode;
 	isLoading?: boolean;
+	variant?: TButtonVariant;
 }
 
-export function Button(props: IButtonProps) {
-	const {
-		children,
-		type = "button",
-		disabled,
-		isLoading = false,
-		className,
-		...restProps
-	} = props;
+export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
+	function Button(props, ref) {
+		const {
+			children,
+			type = "button",
+			disabled,
+			isLoading = false,
+			variant = "primary",
+			className,
+			...restProps
+		} = props;
 
-	return (
-		<button
-			type={type}
-			disabled={disabled || isLoading}
-			className={cn(
-				"inline-flex items-center justify-center gap-2 rounded-sm cursor-pointer",
-				"bg-primary",
-				"transition-colors duration-200",
-				"hover:bg-primary/90",
-				"focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
-				"disabled:cursor-not-allowed disabled:opacity-50",
-				className
-			)}
-			{...restProps}
-		>
-			{isLoading ? (
-				<LoaderCircle
-					aria-hidden="true"
-					className="animate-spin text-white"
-				/>
-			) : (
-				<Text as="span" variant="title-medium" color="white">
-					{isLoading ? "Loading..." : children}
-				</Text>
-			)}
-		</button>
-	);
-}
+		const variantClasses: Record<TButtonVariant, string> = {
+			primary: "bg-primary text-white",
+			ghost: "bg-transparent text-primary-body",
+		};
+
+		const loaderClasses: Record<TButtonVariant, string> = {
+			primary: "text-white",
+			ghost: "text-primary-body",
+		};
+
+		return (
+			<button
+				ref={ref}
+				type={type}
+				disabled={disabled || isLoading}
+				className={cn(
+					"inline-flex items-center justify-center rounded-sm cursor-pointer select-none",
+					"transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-out",
+					"active:scale-[0.99]",
+					"disabled:cursor-not-allowed disabled:opacity-50",
+					"h-40 px-16",
+					variantClasses[variant],
+					className
+				)}
+				{...restProps}
+			>
+				{isLoading ? (
+					<LoaderCircle
+						className={cn("animate-spin", loaderClasses[variant])}
+					/>
+				) : (
+					children
+				)}
+			</button>
+		);
+	}
+);
