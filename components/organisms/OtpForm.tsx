@@ -24,7 +24,10 @@ interface IOtpFormProps {
 	defaultOtp?: string;
 	isSubmitting?: boolean;
 	submissionError?: string;
-	onSubmit?: (payload: { otp: string }) => Promise<void> | void;
+	onSubmit?: (payload: {
+		otp: string;
+		phoneNumber: string;
+	}) => Promise<void> | void;
 }
 
 const initialOtpFormState: IOtpFormState = {
@@ -107,7 +110,7 @@ export function OtpForm(props: IOtpFormProps) {
 			return;
 		}
 
-		await onSubmit?.({ otp: otp.trim() });
+		await onSubmit?.({ otp: otp.trim(), phoneNumber: contactValue ?? "" });
 	}
 
 	return (

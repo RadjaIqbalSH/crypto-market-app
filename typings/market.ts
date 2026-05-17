@@ -23,3 +23,9 @@ export interface IMarketApiCoin {
 	isFavorite?: boolean;
 	type?: string;
 }
+
+export interface IMarketListApiResponse {
+	success: boolean;
+	message: string;
+	data: IMarketApiCoin[];
+}

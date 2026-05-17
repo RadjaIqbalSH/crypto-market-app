@@ -1,11 +1,12 @@
-interface IRequestOptions extends Omit<RequestInit, "body" | "headers"> {
+interface ILocalApiRequestOptions
+	extends Omit<RequestInit, "body" | "headers"> {
 	path: string;
 	body?: Record<string, unknown>;
 	headers?: HeadersInit;
 }
 
-export async function fetchApi(
-	options: IRequestOptions
+export async function fetchLocalApi(
+	options: ILocalApiRequestOptions
 ): Promise<Response | null> {
 	const {
 		path,

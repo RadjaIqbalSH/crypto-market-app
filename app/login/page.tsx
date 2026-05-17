@@ -1,8 +1,8 @@
 import { LoginFormContainer } from "@/app/login/LoginFormContainer";
-import { getPhoneOptions } from "@/services/country.service";
+import { getPhoneCountryOptions } from "@/services/country.service";
 
 export default async function LoginPage() {
-	const phoneOptions = await getPhoneOptions();
+	const phoneOptions = await getPhoneCountryOptions();
 
 	return <LoginFormContainer phoneOptions={phoneOptions} />;
 }

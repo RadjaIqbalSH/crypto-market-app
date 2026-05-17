@@ -6,6 +6,8 @@ export interface IPendingAuthCookie {
 	token: string;
 }
 
+export type TLoginMethod = "email" | "phone";
+
 export interface ILoginRequestBody {
 	email?: string;
 	phone?: string;
@@ -33,6 +35,20 @@ export interface ILoginApiErrorResponse {
 	} | null;
 }
 
+export interface ILoginFormErrors {
+	email?: string;
+	phoneNumber?: string;
+	password?: string;
+}
+
+export interface ILoginSubmitPayload {
+	method: TLoginMethod;
+	email: string;
+	phoneDialCode: string;
+	phoneNumber: string;
+	password: string;
+}
+
 export interface IVerifyOtpRequestBody {
 	otp?: string;
 	phone?: string;
@@ -43,4 +59,11 @@ export interface IVerifyOtpErrorResponse {
 	message: string;
 	status_code: number;
 	data?: Record<string, never> | null;
+}
+
+export interface IVerifyOtpSuccessResponse {
+	success: true;
+	status_code: number;
+	message: string;
+	data: Record<string, never>;
 }

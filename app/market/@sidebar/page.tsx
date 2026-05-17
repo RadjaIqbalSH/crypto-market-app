@@ -43,7 +43,7 @@ export default function MarketSidebar() {
 							name={coin?.name || "-"}
 							price={coin?.priceIdr || "-"}
 							changePercent={coin?.changePercent || "-"}
-							isPositive={coin?.isPositive || true}
+							isPositive={coin?.isPositive || false}
 							hot={coin?.hot || false}
 							selected={coin.id === selectedCoinId}
 							onClick={() => setSelectedCoinId(coin?.id || "")}

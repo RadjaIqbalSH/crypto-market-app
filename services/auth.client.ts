@@ -1,17 +1,12 @@
-import { type ILoginFormErrors } from "@/components/organisms/LoginForm";
-import { fetchApi } from "@/helpers/fetch";
+import { fetchLocalApi } from "@/helpers/fetch";
 import {
 	type ILoginApiErrorResponse,
+	type ILoginFormErrors,
+	type ILoginSubmitPayload,
 	type IVerifyOtpErrorResponse,
 } from "@/typings/auth";
 
-export async function login(payload: {
-	method: "email" | "phone";
-	email: string;
-	phoneDialCode: string;
-	phoneNumber: string;
-	password: string;
-}) {
+export async function submitLogin(payload: ILoginSubmitPayload) {
 	const requestBody =
 		payload.method === "email"
 			? {
@@ -24,7 +19,7 @@ export async function login(payload: {
 	};
 
 	try {
-		const response = await fetchApi({
+		const response = await fetchLocalApi({
 			path: "/api/auth/login",
 			method: "POST",
 			body: requestBody,
@@ -72,13 +67,14 @@ export async function login(payload: {
 	}
 }
 
-export async function verifyOtp(payload: { otp: string }) {
+export async function submitOtpVerification(payload: { otp: string, phoneNumber: string }) {
 	try {
-		const response = await fetchApi({
+		const response = await fetchLocalApi({
 			path: "/api/auth/verify-otp",
 			method: "POST",
 			body: {
 				otp: payload.otp,
+				phone: payload.phoneNumber,
 			},
 		});
 

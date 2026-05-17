@@ -74,13 +74,8 @@ export default function CardCoin(props: ICardCoinProps) {
 				<Text
 					as="span"
 					variant="label-large"
-					color={
-						selected ? "white" : isPositive ? "success" : "error"
-					}
-					className={cn(
-						"w-fit rounded-sm p-2",
-						selected ? "bg-white/16" : "bg-white"
-					)}
+					color={isPositive ? "success" : "error"}
+					className={cn("w-fit rounded-sm py-2 px-4 bg-white")}
 				>
 					{changePercent}
 				</Text>

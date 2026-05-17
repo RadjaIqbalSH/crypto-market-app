@@ -1,14 +1,12 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { AUTH_TOKEN_COOKIE, isJwtTokenUsable } from "@/auth";
+import { AUTH_TOKEN_COOKIE, isJwtTokenUsable } from "@/auth-session";
+import { readJsonOrFallback } from "@/helpers/api-response";
 import { mapMarketCoins } from "@/services/market.service";
-import { type IMarketApiCoin } from "@/typings/market";
-
-interface IMarketListApiResponse {
-	success: boolean;
-	message: string;
-	data: IMarketApiCoin[];
-}
+import {
+	type IMarketApiCoin,
+	type IMarketListApiResponse,
+} from "@/typings/market";
 
 export async function GET() {
 	try {
@@ -28,7 +26,7 @@ export async function GET() {
 
 		const authorizationToken = authToken as string;
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_BASE_URL}/list-crypto`,
+			`${process.env.API_BASE_URL}/list-crypto`,
 			{
 				cache: "no-store",
 				headers: {
@@ -38,17 +36,34 @@ export async function GET() {
 		);
 
 		if (!response.ok) {
-			return NextResponse.json([], { status: response.status });
+				const result = await readJsonOrFallback(response, {
+					success: false,
+					message: "Unable to fetch market data right now.",
+					status_code: response.status,
+					data: [],
+				});
+
+			return NextResponse.json(result, { status: response.status });
 		}
 
 		const result = (await response.json()) as IMarketListApiResponse;
 
+		console.log("result => ", result)
+
 		if (!result.success) {
-			return NextResponse.json([], { status: 200 });
+			return NextResponse.json(result, { status: 200 });
 		}
 
 		return NextResponse.json(mapMarketCoins(result.data));
 	} catch {
-		return NextResponse.json([], { status: 500 });
+		return NextResponse.json(
+				{
+					success: false,
+					message: "Unable to fetch market data right now.",
+					status_code: 500,
+					data: [] as IMarketApiCoin[],
+				},
+			{ status: 500 }
+		);
 	}
 }

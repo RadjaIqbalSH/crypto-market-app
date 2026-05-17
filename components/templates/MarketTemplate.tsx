@@ -10,7 +10,9 @@ import {
 	useState,
 } from "react";
 import { Text } from "@/components/atoms/Text";
+import { useDebounce } from "@/hooks/use-debounce";
 import { type IMarketCoin } from "@/typings/market";
+import Image from "next/image";
 
 interface IMarketTemplateProps {
 	coins: IMarketCoin[];
@@ -66,9 +68,10 @@ export default function MarketTemplate(props: IMarketTemplateProps) {
 	const [selectedCoinId, setSelectedCoinId] = useState<string | null>(
 		coins[0]?.id ?? null
 	);
+	const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
 	const tabs = useMemo(() => buildMarketTabs(coins), [coins]);
-	const normalizedQuery = searchQuery.trim().toLowerCase();
+	const normalizedQuery = debouncedSearchQuery.trim().toLowerCase();
 	const filteredCoins = useMemo(() => {
 		return coins.filter((coin) => {
 			const coinType = coin.type ?? "";
@@ -127,7 +130,7 @@ export default function MarketTemplate(props: IMarketTemplateProps) {
 				</aside>
 				<main className="w-full px-16">
 					<div className="mb-16 flex h-132 items-center gap-8 border-b border-border-and-divider px-16 pb-2 pt-64">
-						<div className="h-40 w-40 rounded-sm bg-surface" />
+						<Image className="rounded-sm" src="/images/avatar.webp" width={40} height={40} alt="profile"/>
 						<Text as="h3" variant="headline-large" color="primary-body">
 							John Johnson
 						</Text>

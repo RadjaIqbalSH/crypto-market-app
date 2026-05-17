@@ -2,8 +2,10 @@ import { NextResponse } from "next/server";
 import {
 	getAuthCookieOptions,
 	PENDING_AUTH_COOKIE,
-} from "@/auth";
+} from "@/auth-session";
+import { readJsonOrFallback } from "@/helpers/api-response";
 import {
+	type ILoginApiErrorResponse,
 	type ILoginRequestBody,
 	type ILoginSuccessResponse,
 	type IPendingAuthCookie,
@@ -13,7 +15,7 @@ export async function POST(request: Request) {
 	try {
 		const body = (await request.json()) as ILoginRequestBody;
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
+			`${process.env.API_BASE_URL}/auth/login`,
 			{
 				method: "POST",
 				headers: {
@@ -24,7 +26,14 @@ export async function POST(request: Request) {
 			}
 		);
 
-		const result = (await response.json()) as ILoginSuccessResponse;
+		const result = await readJsonOrFallback<
+			ILoginSuccessResponse | ILoginApiErrorResponse
+		>(response, {
+			success: false,
+			message: "Unable to process your login request right now.",
+			status_code: response.status,
+			data: null,
+		});
 		const nextResponse = NextResponse.json(result, {
 			status: response.status,
 		});

@@ -9,14 +9,12 @@ import { Text } from "@/components/atoms/Text";
 import { EmailInput } from "@/components/molecules/EmailInput";
 import { FormField } from "@/components/molecules/FormField";
 import { OtpInput } from "@/components/molecules/OtpInput";
-import {
-	PhoneNumberInput,
-	type IPhoneCountryOption,
-} from "@/components/molecules/PhoneNumberInput";
+import { PhoneNumberInput } from "@/components/molecules/PhoneNumberInput";
 import { PasswordInput } from "@/components/molecules/PasswordInput";
 import { SearchInput } from "@/components/molecules/SearchInput";
 import { Tabs, type ITabItem } from "@/components/molecules/Tabs";
 import { LoginForm } from "@/components/organisms/LoginForm";
+import { type IPhoneCountryOption } from "@/typings/country";
 
 const phoneOptions: IPhoneCountryOption[] = [
 	{

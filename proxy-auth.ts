@@ -4,12 +4,17 @@ import {
 	isJwtTokenUsable,
 	parsePendingAuthCookie,
 	PENDING_AUTH_COOKIE,
-} from "@/auth";
+} from "@/auth-session";
 
 export type TAuthStatus = "authenticated" | "pending-otp" | "guest";
-export type TGuardedPath = "/login" | "/otp" | "/market";
+export type TGuardedPath = "/" | "/login" | "/otp" | "/market";
 
 const redirectRules: Record<TGuardedPath, Record<TAuthStatus, string | null>> = {
+	"/": {
+		authenticated: "/market",
+		"pending-otp": "/otp",
+		guest: "/login",
+	},
 	"/login": {
 		authenticated: "/market",
 		"pending-otp": "/otp",

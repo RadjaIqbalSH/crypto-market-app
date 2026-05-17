@@ -1,25 +1,29 @@
-import type { Metadata } from "next";
+import { type Metadata } from "next";
 import { Roboto } from "next/font/google";
+import { type ReactNode } from "react";
 import "./globals.css";
 
-const robot = Roboto({
-	variable: "--font-roboto",
+const roboto = Roboto({
 	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
+	variable: "--font-roboto",
 });
 
 export const metadata: Metadata = {
-	title: "Crypto Market",
-	description: "Crypto Market App",
+	title: "Crypto Market App",
+	description: "Crypto market dashboard",
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+interface IRootLayoutProps {
+	children: ReactNode;
+}
+
+export default function RootLayout(props: IRootLayoutProps) {
+	const { children } = props;
+
 	return (
-		<html lang="en" className={` ${robot.variable} h-full antialiased`}>
-			<body className="min-h-full">{children}</body>
+		<html lang="en" className={roboto.variable}>
+			<body className="bg-bg text-primary-body">{children}</body>
 		</html>
 	);
 }

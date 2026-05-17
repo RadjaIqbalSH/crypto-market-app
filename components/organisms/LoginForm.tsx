@@ -4,14 +4,15 @@ import { FormEvent, useCallback, useEffect, useReducer } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Text } from "@/components/atoms/Text";
 import { EmailInput } from "@/components/molecules/EmailInput";
-import {
-	PhoneNumberInput,
-	type IPhoneCountryOption,
-} from "@/components/molecules/PhoneNumberInput";
+import { PhoneNumberInput } from "@/components/molecules/PhoneNumberInput";
 import { PasswordInput } from "@/components/molecules/PasswordInput";
 import { cn } from "@/helpers/cn";
-
-type TLoginMethod = "email" | "phone";
+import {
+	type ILoginFormErrors,
+	type ILoginSubmitPayload,
+	type TLoginMethod,
+} from "@/typings/auth";
+import { type IPhoneCountryOption } from "@/typings/country";
 
 interface ILoginFormState {
 	method: TLoginMethod;
@@ -107,26 +108,12 @@ function loginFormReducer(
 	}
 }
 
-interface ILoginFormSubmitPayload {
-	method: TLoginMethod;
-	email: string;
-	phoneDialCode: string;
-	phoneNumber: string;
-	password: string;
-}
-
-export interface ILoginFormErrors {
-	email?: string;
-	phoneNumber?: string;
-	password?: string;
-}
-
 interface ILoginFormProps {
 	phoneOptions: IPhoneCountryOption[];
 	className?: string;
 	isSubmitting?: boolean;
 	submissionErrors?: ILoginFormErrors;
-	onSubmit?: (payload: ILoginFormSubmitPayload) => Promise<void> | void;
+	onSubmit?: (payload: ILoginSubmitPayload) => Promise<void> | void;
 }
 
 export function LoginForm(props: ILoginFormProps) {

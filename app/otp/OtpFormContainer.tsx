@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { OtpForm } from "@/components/organisms/OtpForm";
-import { verifyOtp } from "@/services/auth.client";
+import { submitOtpVerification } from "@/services/auth.client";
 import { type IPendingAuthCookie } from "@/typings/auth";
 
 interface IOtpFormContainerProps {
@@ -16,12 +16,12 @@ export function OtpFormContainer(props: IOtpFormContainerProps) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submissionError, setSubmissionError] = useState<string>();
 
-	async function handleSubmit(payload: { otp: string }) {
+	async function handleSubmit(payload: { otp: string, phoneNumber: string }) {
 		setIsSubmitting(true);
 		setSubmissionError(undefined);
 
 		try {
-			const result = await verifyOtp(payload);
+			const result = await submitOtpVerification(payload);
 
 			if (!result.ok) {
 				setSubmissionError(result.errorMessage);

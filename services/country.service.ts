@@ -1,6 +1,8 @@
-import { type IPhoneCountryOption } from "@/components/molecules/PhoneNumberInput";
-import { fetchServerApi } from "@/helpers/server-fetch";
-import { type ICountry } from "@/typings/country";
+import { fetchServerLocalApi } from "@/helpers/server-fetch";
+import {
+	type ICountry,
+	type IPhoneCountryOption,
+} from "@/typings/country";
 
 function countryCodeToFlag(code: string) {
 	return code
@@ -10,9 +12,9 @@ function countryCodeToFlag(code: string) {
 		);
 }
 
-export async function getPhoneOptions(): Promise<IPhoneCountryOption[]> {
+export async function getPhoneCountryOptions(): Promise<IPhoneCountryOption[]> {
 	try {
-		const response = await fetchServerApi({
+		const response = await fetchServerLocalApi({
 			path: "/api/countries",
 		});
 

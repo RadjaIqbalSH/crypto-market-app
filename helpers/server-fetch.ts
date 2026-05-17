@@ -1,14 +1,15 @@
 import { headers } from "next/headers";
-import { fetchApi } from "@/helpers/fetch";
+import { fetchLocalApi } from "@/helpers/fetch";
 
-interface IServerRequestOptions extends Omit<RequestInit, "body" | "headers"> {
+interface IServerLocalApiRequestOptions
+	extends Omit<RequestInit, "body" | "headers"> {
 	path: string;
 	body?: Record<string, unknown>;
 	headers?: HeadersInit;
 }
 
-export async function fetchServerApi(
-	options: IServerRequestOptions
+export async function fetchServerLocalApi(
+	options: IServerLocalApiRequestOptions
 ): Promise<Response | null> {
 	const headersList = await headers();
 	const host = headersList.get("host");
@@ -25,7 +26,7 @@ export async function fetchServerApi(
 		requestHeaders.set("cookie", cookieHeader);
 	}
 
-	return fetchApi({
+	return fetchLocalApi({
 		...options,
 		path: `${protocol}://${host}${options.path.startsWith("/") ? options.path : `/${options.path}`}`,
 		headers: requestHeaders,

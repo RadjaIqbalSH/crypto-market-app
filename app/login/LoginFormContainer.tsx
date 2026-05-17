@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { LoginForm } from "@/components/organisms/LoginForm";
+import { submitLogin } from "@/services/auth.client";
 import {
-	LoginForm,
 	type ILoginFormErrors,
-} from "@/components/organisms/LoginForm";
-import { type IPhoneCountryOption } from "@/components/molecules/PhoneNumberInput";
-import { login } from "@/services/auth.client";
+	type ILoginSubmitPayload,
+} from "@/typings/auth";
+import { type IPhoneCountryOption } from "@/typings/country";
 
 interface ILoginFormContainerProps {
 	phoneOptions: IPhoneCountryOption[];
@@ -19,18 +20,12 @@ export function LoginFormContainer(props: ILoginFormContainerProps) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submissionErrors, setSubmissionErrors] = useState<ILoginFormErrors>({});
 
-	async function handleSubmit(payload: {
-		method: "email" | "phone";
-		email: string;
-		phoneDialCode: string;
-		phoneNumber: string;
-		password: string;
-	}) {
+	async function handleSubmit(payload: ILoginSubmitPayload) {
 		setIsSubmitting(true);
 		setSubmissionErrors({});
 
 		try {
-			const result = await login(payload);
+			const result = await submitLogin(payload);
 
 			if (result.ok) {
 				router.push("/otp");

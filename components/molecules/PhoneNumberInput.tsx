@@ -4,7 +4,6 @@ import {
 	forwardRef,
 	InputHTMLAttributes,
 	ChangeEvent,
-	ReactNode,
 	useEffect,
 	useId,
 	useRef,
@@ -17,13 +16,7 @@ import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
 import { Text } from "@/components/atoms/Text";
 import { cn } from "@/helpers/cn";
-
-export interface IPhoneCountryOption {
-	code: string;
-	dialCode: string;
-	label: string;
-	flag: ReactNode;
-}
+import { type IPhoneCountryOption } from "@/typings/country";
 
 interface IPhoneNumberInputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {

@@ -1,4 +1,4 @@
-import { fetchServerApi } from "@/helpers/server-fetch";
+import { fetchServerLocalApi } from "@/helpers/server-fetch";
 import { type IMarketApiCoin, type IMarketCoin } from "@/typings/market";
 
 export function mapMarketCoins(coins: IMarketApiCoin[]): IMarketCoin[] {
@@ -9,9 +9,9 @@ export function mapMarketCoins(coins: IMarketApiCoin[]): IMarketCoin[] {
 	}));
 }
 
-export async function getMarketCoins(): Promise<IMarketCoin[]> {
+export async function getMarketCoinList(): Promise<IMarketCoin[]> {
 	try {
-		const response = await fetchServerApi({
+		const response = await fetchServerLocalApi({
 			path: "/api/market/list-crypto",
 		});
 

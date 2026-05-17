@@ -5,8 +5,13 @@ import {
 	getAuthCookieOptions,
 	parsePendingAuthCookie,
 	PENDING_AUTH_COOKIE,
-} from "@/auth";
-import { type IVerifyOtpRequestBody } from "@/typings/auth";
+} from "@/auth-session";
+import { readJsonOrFallback } from "@/helpers/api-response";
+import {
+	type IVerifyOtpErrorResponse,
+	type IVerifyOtpRequestBody,
+	type IVerifyOtpSuccessResponse,
+} from "@/typings/auth";
 
 export async function POST(request: Request) {
 	try {
@@ -30,7 +35,7 @@ export async function POST(request: Request) {
 		}
 
 		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/verify-otp`,
+			`${process.env.API_BASE_URL}/auth/verify-otp`,
 			{
 				method: "POST",
 				headers: {
@@ -45,7 +50,14 @@ export async function POST(request: Request) {
 			}
 		);
 
-		const result = await response.json();
+		const result = await readJsonOrFallback<
+			IVerifyOtpSuccessResponse | IVerifyOtpErrorResponse
+		>(response, {
+			success: false,
+			message: "Unable to verify the OTP right now.",
+			status_code: response.status,
+			data: null,
+		});
 		const nextResponse = NextResponse.json(result, {
 			status: response.status,
 		});
