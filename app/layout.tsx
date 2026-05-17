@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { type ReactNode } from "react";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -23,7 +24,16 @@ export default function RootLayout(props: IRootLayoutProps) {
 
 	return (
 		<html lang="en" className={roboto.variable}>
-			<body className="bg-bg text-primary-body">{children}</body>
+			<body className="bg-bg text-primary-body">
+				<NextTopLoader
+					color="#613de4"
+					height={4}
+					showSpinner={false}
+					crawlSpeed={150}
+					speed={300}
+				/>
+				{children}
+			</body>
 		</html>
 	);
 }

@@ -130,7 +130,7 @@ export function Tabs(props: ITabsProps) {
 				<div
 					ref={listRef}
 					className={cn(
-						"-mb-2 flex items-end gap-4 overflow-x-auto pb-2 scroll-smooth whitespace-nowrap [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
+						"-mb-2 flex items-end gap-4 overflow-x-auto pb-2 scroll-smooth whitespace-nowrap scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
 						listClassName
 					)}
 				>
@@ -144,7 +144,7 @@ export function Tabs(props: ITabsProps) {
 								variant="ghost"
 								className={cn(
 									"relative h-auto rounded-none px-24 py-12 text-sm/[20px] font-medium",
-									"after:absolute after:bottom-[-2px] after:left-0 after:h-2 after:w-full after:rounded-full after:transition-colors",
+									"after:absolute after:-bottom-2 after:left-0 after:h-2 after:w-full after:rounded-full after:transition-colors",
 									isActive ? "after:bg-primary" : "after:bg-transparent",
 									tabClassName
 								)}

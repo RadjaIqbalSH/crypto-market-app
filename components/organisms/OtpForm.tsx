@@ -115,7 +115,7 @@ export function OtpForm(props: IOtpFormProps) {
 
 	return (
 		<form
-			className={cn("relative space-y-32 w-[360px]", className)}
+			className={cn("relative space-y-32 w-360", className)}
 			noValidate
 			onSubmit={handleSubmit}
 		>
