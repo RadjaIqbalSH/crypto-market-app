@@ -28,7 +28,7 @@ export function LoginFormContainer(props: ILoginFormContainerProps) {
 			const result = await submitLogin(payload);
 
 			if (result.ok) {
-				router.push("/otp");
+				router.push("/login/otp");
 				return;
 			}
 

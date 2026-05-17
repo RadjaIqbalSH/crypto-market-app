@@ -7,27 +7,27 @@ import {
 } from "@/lib/auth-session";
 
 export type TAuthStatus = "authenticated" | "pending-otp" | "guest";
-export type TGuardedPath = "/" | "/login" | "/otp" | "/market";
+export type TGuardedPath = "/" | "/login" | "/login/otp" | "/market";
 
 const redirectRules: Record<TGuardedPath, Record<TAuthStatus, string | null>> = {
 	"/": {
 		authenticated: "/market",
-		"pending-otp": "/otp",
+		"pending-otp": "/login/otp",
 		guest: "/login",
 	},
 	"/login": {
 		authenticated: "/market",
-		"pending-otp": "/otp",
+		"pending-otp": "/login/otp",
 		guest: null,
 	},
-	"/otp": {
+	"/login/otp": {
 		authenticated: "/market",
 		"pending-otp": null,
 		guest: "/login",
 	},
 	"/market": {
 		authenticated: null,
-		"pending-otp": "/otp",
+		"pending-otp": "/login/otp",
 		guest: "/login",
 	},
 };

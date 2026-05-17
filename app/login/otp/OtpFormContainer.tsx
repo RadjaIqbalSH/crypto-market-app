@@ -16,7 +16,7 @@ export function OtpFormContainer(props: IOtpFormContainerProps) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submissionError, setSubmissionError] = useState<string>();
 
-	async function handleSubmit(payload: { otp: string, phoneNumber: string }) {
+	async function handleSubmit(payload: { otp: string; phoneNumber: string }) {
 		setIsSubmitting(true);
 		setSubmissionError(undefined);
 
