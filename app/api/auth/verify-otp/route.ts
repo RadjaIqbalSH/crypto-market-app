@@ -5,7 +5,7 @@ import {
 	getAuthCookieOptions,
 	parsePendingAuthCookie,
 	PENDING_AUTH_COOKIE,
-} from "@/auth-session";
+} from "@/lib/auth-session";
 import { readJsonOrFallback } from "@/helpers/api-response";
 import {
 	type IVerifyOtpErrorResponse,

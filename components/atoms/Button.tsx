@@ -1,10 +1,10 @@
-import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
+import { ComponentPropsWithoutRef, forwardRef, ReactNode } from "react";
 import { LoaderCircle } from "lucide-react";
 import { cn } from "@/helpers/cn";
 
 export type TButtonVariant = "primary" | "ghost";
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends ComponentPropsWithoutRef<"button"> {
 	children: ReactNode;
 	isLoading?: boolean;
 	variant?: TButtonVariant;

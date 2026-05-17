@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { AUTH_TOKEN_COOKIE, isJwtTokenUsable } from "@/auth-session";
+import { AUTH_TOKEN_COOKIE, isJwtTokenUsable } from "@/lib/auth-session";
 import { readJsonOrFallback } from "@/helpers/api-response";
 import { mapMarketCoins } from "@/services/market.service";
 import {
@@ -47,8 +47,6 @@ export async function GET() {
 		}
 
 		const result = (await response.json()) as IMarketListApiResponse;
-
-		console.log("result => ", result)
 
 		if (!result.success) {
 			return NextResponse.json(result, { status: 200 });

@@ -1,13 +1,13 @@
 "use client";
 
-import { forwardRef, InputHTMLAttributes } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { Search } from "lucide-react";
 import { FieldShell } from "@/components/atoms/FieldShell";
 import { Input } from "@/components/atoms/Input";
 import { cn } from "@/helpers/cn";
 
 interface ISearchInputProps
-	extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+	extends Omit<ComponentPropsWithoutRef<"input">, "type"> {
 	containerClassName?: string;
 }
 

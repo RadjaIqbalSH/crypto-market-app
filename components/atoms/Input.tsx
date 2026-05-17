@@ -1,9 +1,9 @@
-import { forwardRef, InputHTMLAttributes } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 import { cn } from "@/helpers/cn";
 
 type TInputVariant = "default" | "otp";
 
-interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface IInputProps extends ComponentPropsWithoutRef<"input"> {
 	variant?: TInputVariant;
 }
 

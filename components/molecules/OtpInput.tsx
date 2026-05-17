@@ -3,8 +3,8 @@
 import {
 	ChangeEvent,
 	ClipboardEvent,
+	ComponentPropsWithoutRef,
 	forwardRef,
-	InputHTMLAttributes,
 	KeyboardEvent,
 	useId,
 	useImperativeHandle,
@@ -18,7 +18,7 @@ import { cn } from "@/helpers/cn";
 
 interface IOtpInputProps
 	extends Omit<
-		InputHTMLAttributes<HTMLInputElement>,
+		ComponentPropsWithoutRef<"input">,
 		"type" | "value" | "defaultValue" | "onChange"
 	> {
 	label?: string;

@@ -22,7 +22,7 @@ export default function MarketContent() {
 				width={40}
 				height={40}
 				alt={`${selectedCoin.name} logo`}
-				className="object-contain rounded-sm"
+				className="size-40 object-contain rounded-sm"
 			/>
 			<div className="min-w-0">
 				<Text as="p" variant="headline-small" color="primary-body">

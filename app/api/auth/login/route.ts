@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import {
-	getAuthCookieOptions,
+	getPendingAuthCookieOptions,
 	PENDING_AUTH_COOKIE,
-} from "@/auth-session";
+} from "@/lib/auth-session";
 import { readJsonOrFallback } from "@/helpers/api-response";
 import {
 	type ILoginApiErrorResponse,
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
 			nextResponse.cookies.set(
 				PENDING_AUTH_COOKIE,
 				JSON.stringify(pendingAuth),
-				getAuthCookieOptions()
+				getPendingAuthCookieOptions()
 			);
 		}
 

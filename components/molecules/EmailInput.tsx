@@ -1,13 +1,13 @@
 "use client";
 
-import { forwardRef, InputHTMLAttributes, useId } from "react";
+import { ComponentPropsWithoutRef, forwardRef, useId } from "react";
 import { FieldShell } from "@/components/atoms/FieldShell";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
 import { cn } from "@/helpers/cn";
 
 interface IEmailInputProps
-	extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+	extends Omit<ComponentPropsWithoutRef<"input">, "type"> {
 	label?: string;
 	containerClassName?: string;
 	helperText?: string;

@@ -47,7 +47,7 @@ export default function CardCoin(props: ICardCoinProps) {
 						width={40}
 						height={40}
 						alt={`${name} logo`}
-						className="object-contain rounded-sm"
+						className="size-40 object-contain rounded-sm"
 					/>
 				) : null}
 				<div className="flex flex-col gap-4 items-start">

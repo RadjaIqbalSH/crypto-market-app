@@ -3,6 +3,7 @@ import { type IPendingAuthCookie } from "@/typings/auth";
 
 export const PENDING_AUTH_COOKIE = "pending_auth";
 export const AUTH_TOKEN_COOKIE = "auth_token";
+const PENDING_AUTH_MAX_AGE_IN_SECONDS = 60 * 30;
 
 export function getAuthCookieOptions() {
 	return {
@@ -10,6 +11,13 @@ export function getAuthCookieOptions() {
 		sameSite: "lax" as const,
 		secure: process.env.NODE_ENV === "production",
 		path: "/",
+	};
+}
+
+export function getPendingAuthCookieOptions() {
+	return {
+		...getAuthCookieOptions(),
+		maxAge: PENDING_AUTH_MAX_AGE_IN_SECONDS,
 	};
 }
 

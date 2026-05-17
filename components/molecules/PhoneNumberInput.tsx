@@ -1,8 +1,8 @@
 "use client";
 
 import {
+	ComponentPropsWithoutRef,
 	forwardRef,
-	InputHTMLAttributes,
 	ChangeEvent,
 	useEffect,
 	useId,
@@ -19,7 +19,7 @@ import { cn } from "@/helpers/cn";
 import { type IPhoneCountryOption } from "@/typings/country";
 
 interface IPhoneNumberInputProps
-	extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+	extends Omit<ComponentPropsWithoutRef<"input">, "type"> {
 	label?: string;
 	options: IPhoneCountryOption[];
 	defaultSelectedCode?: string;

@@ -4,7 +4,7 @@ import {
 	isJwtTokenUsable,
 	parsePendingAuthCookie,
 	PENDING_AUTH_COOKIE,
-} from "@/auth-session";
+} from "@/lib/auth-session";
 
 export type TAuthStatus = "authenticated" | "pending-otp" | "guest";
 export type TGuardedPath = "/" | "/login" | "/otp" | "/market";

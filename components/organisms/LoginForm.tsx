@@ -196,7 +196,7 @@ export function LoginForm(props: ILoginFormProps) {
 					Welcome Back
 				</Text>
 				<Text as="p" variant="body-medium" color="primary-body">
-					Enter your Credentials to access your account
+					Enter your credentials to access your account
 				</Text>
 			</div>
 			{method === "email" ? (

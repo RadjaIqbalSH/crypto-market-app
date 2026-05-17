@@ -3,7 +3,7 @@ import { OtpFormContainer } from "@/app/otp/OtpFormContainer";
 import {
 	parsePendingAuthCookie,
 	PENDING_AUTH_COOKIE,
-} from "@/auth-session";
+} from "@/lib/auth-session";
 
 export default async function OtpPage() {
 	const cookieStore = await cookies();

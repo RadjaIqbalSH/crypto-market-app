@@ -24,11 +24,11 @@ export default function AuthTemplate(props: IAuthTemplateProps) {
 					src={image}
 					width={540}
 					height={540}
-					className="object-contain"
+					className="h-540 w-540 object-contain"
 					alt="image-device"
 				/>
 			</div>
-			<div className="w-1/2 px-[120px] flex items-center justify-center">
+			<div className="w-1/2 px-120 flex items-center justify-center">
 				{children}
 			</div>
 		</div>

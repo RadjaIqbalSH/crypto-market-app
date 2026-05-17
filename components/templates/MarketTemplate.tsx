@@ -130,7 +130,13 @@ export default function MarketTemplate(props: IMarketTemplateProps) {
 				</aside>
 				<main className="w-full px-16">
 					<div className="mb-16 flex h-132 items-center gap-8 border-b border-border-and-divider px-16 pb-2 pt-64">
-						<Image className="rounded-sm" src="/images/avatar.webp" width={40} height={40} alt="profile"/>
+						<Image
+							className="size-40 rounded-sm"
+							src="/images/avatar.webp"
+							width={40}
+							height={40}
+							alt="profile"
+						/>
 						<Text as="h3" variant="headline-large" color="primary-body">
 							John Johnson
 						</Text>
