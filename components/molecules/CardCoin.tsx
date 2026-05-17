@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { MouseEventHandler } from "react";
 import { Text } from "@/components/atoms/Text";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 interface ICardCoinProps {
 	image: string;

@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Text } from "../atoms/Text";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 export interface ITabItem {
 	id: string;

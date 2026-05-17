@@ -7,18 +7,10 @@ import {
 	type ILoginFormErrors,
 } from "@/components/organisms/LoginForm";
 import { type IPhoneCountryOption } from "@/components/molecules/PhoneNumberInput";
+import { login } from "@/services/auth.client";
 
 interface ILoginFormContainerProps {
 	phoneOptions: IPhoneCountryOption[];
-}
-
-interface ILoginApiErrorResponse {
-	success: false;
-	message: string;
-	status_code: number;
-	data?: {
-		field?: "password" | "email" | "phone";
-	} | null;
 }
 
 export function LoginFormContainer(props: ILoginFormContainerProps) {
@@ -38,47 +30,14 @@ export function LoginFormContainer(props: ILoginFormContainerProps) {
 		setSubmissionErrors({});
 
 		try {
-			const requestBody =
-				payload.method === "email"
-					? {
-							email: payload.email,
-							password: payload.password,
-						}
-					: {
-							phone: `${payload.phoneDialCode.replace(/\+/g, "")}${payload.phoneNumber}`,
-							password: payload.password,
-						};
+			const result = await login(payload);
 
-			const response = await fetch("/api/auth/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(requestBody),
-			});
-
-			if (response.ok) {
-				await response.json();
+			if (result.ok) {
 				router.push("/otp");
 				return;
 			}
 
-			const result = (await response.json()) as ILoginApiErrorResponse;
-			const nextErrors: ILoginFormErrors = {};
-
-			if (result.data?.field === "email") {
-				nextErrors.email = result.message;
-			}
-
-			if (result.data?.field === "phone") {
-				nextErrors.phoneNumber = result.message;
-			}
-
-			if (result.data?.field === "password") {
-				nextErrors.password = result.message;
-			}
-
-			setSubmissionErrors(nextErrors);
+			setSubmissionErrors(result.errors);
 		} catch {
 			setSubmissionErrors({
 				password: "Unable to sign in right now. Please try again.",

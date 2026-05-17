@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useReducer } from "react";
 import { Button } from "@/components/atoms/Button";
 import { Text } from "@/components/atoms/Text";
 import { OtpInput } from "@/components/molecules/OtpInput";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 interface IOtpFormState {
 	otp: string;

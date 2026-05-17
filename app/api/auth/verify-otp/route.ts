@@ -5,12 +5,8 @@ import {
 	getAuthCookieOptions,
 	parsePendingAuthCookie,
 	PENDING_AUTH_COOKIE,
-} from "@/lib/auth";
-
-interface IVerifyOtpRequestBody {
-	otp?: string;
-	phone?: string;
-}
+} from "@/auth";
+import { type IVerifyOtpRequestBody } from "@/typings/auth";
 
 export async function POST(request: Request) {
 	try {
@@ -34,7 +30,7 @@ export async function POST(request: Request) {
 		}
 
 		const response = await fetch(
-			"https://fe-technical-assignment.dxtr.asia/api/v1/auth/verify-otp",
+			`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/verify-otp`,
 			{
 				method: "POST",
 				headers: {

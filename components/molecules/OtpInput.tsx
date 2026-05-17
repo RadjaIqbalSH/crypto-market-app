@@ -14,7 +14,7 @@ import {
 } from "react";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 interface IOtpInputProps
 	extends Omit<

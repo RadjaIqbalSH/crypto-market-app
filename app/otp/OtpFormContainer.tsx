@@ -3,17 +3,11 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { OtpForm } from "@/components/organisms/OtpForm";
-import { type IPendingAuthCookie } from "@/lib/auth";
+import { verifyOtp } from "@/services/auth.client";
+import { type IPendingAuthCookie } from "@/typings/auth";
 
 interface IOtpFormContainerProps {
 	pendingAuth: IPendingAuthCookie;
-}
-
-interface IVerifyOtpErrorResponse {
-	success: false;
-	message: string;
-	status_code: number;
-	data?: Record<string, never> | null;
 }
 
 export function OtpFormContainer(props: IOtpFormContainerProps) {
@@ -27,21 +21,10 @@ export function OtpFormContainer(props: IOtpFormContainerProps) {
 		setSubmissionError(undefined);
 
 		try {
-			const response = await fetch("/api/auth/verify-otp", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					otp: payload.otp,
-				}),
-			});
+			const result = await verifyOtp(payload);
 
-			if (!response.ok) {
-				const result = (await response.json()) as IVerifyOtpErrorResponse;
-				setSubmissionError(
-					result.message || "The verification code is invalid."
-				);
+			if (!result.ok) {
+				setSubmissionError(result.errorMessage);
 				return;
 			}
 

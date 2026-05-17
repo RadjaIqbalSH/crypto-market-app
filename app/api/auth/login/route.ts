@@ -2,33 +2,18 @@ import { NextResponse } from "next/server";
 import {
 	getAuthCookieOptions,
 	PENDING_AUTH_COOKIE,
+} from "@/auth";
+import {
+	type ILoginRequestBody,
+	type ILoginSuccessResponse,
 	type IPendingAuthCookie,
-} from "@/lib/auth";
-
-interface ILoginRequestBody {
-	email?: string;
-	phone?: string;
-	password?: string;
-}
-
-interface ILoginSuccessResponse {
-	success: true;
-	status_code: number;
-	message: string;
-	data: {
-		otp: string;
-		phone: string;
-		email?: string;
-		token: string;
-	};
-}
+} from "@/typings/auth";
 
 export async function POST(request: Request) {
 	try {
 		const body = (await request.json()) as ILoginRequestBody;
-
 		const response = await fetch(
-			"https://fe-technical-assignment.dxtr.asia/api/v1/auth/login",
+			`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`,
 			{
 				method: "POST",
 				headers: {

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { OtpFormContainer } from "@/app/otp/OtpFormContainer";
-import { parsePendingAuthCookie, PENDING_AUTH_COOKIE } from "@/lib/auth";
+import { parsePendingAuthCookie, PENDING_AUTH_COOKIE } from "@/auth";
 
 export default async function OtpPage() {
 	const cookieStore = await cookies();

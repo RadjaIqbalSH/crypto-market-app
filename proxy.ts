@@ -4,7 +4,7 @@ import {
 	getProxyRedirectPath,
 	isGuardedPath,
 	withAuthCookieCleanup,
-} from "@/lib/proxy-auth";
+} from "@/proxy-auth";
 
 export function proxy(request: NextRequest) {
 	const pathname = request.nextUrl.pathname;

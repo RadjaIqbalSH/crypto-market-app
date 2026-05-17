@@ -9,7 +9,7 @@ import {
 	type IPhoneCountryOption,
 } from "@/components/molecules/PhoneNumberInput";
 import { PasswordInput } from "@/components/molecules/PasswordInput";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 type TLoginMethod = "email" | "phone";
 

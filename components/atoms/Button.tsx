@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from "react";
 import { LoaderCircle } from "lucide-react";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 export type TButtonVariant = "primary" | "ghost";
 

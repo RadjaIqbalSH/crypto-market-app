@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from "react";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 interface IFieldShellProps extends ComponentPropsWithoutRef<"div"> {
 	disabled?: boolean;

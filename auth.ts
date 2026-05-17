@@ -1,15 +1,8 @@
 import { decodeJwt } from "jose";
+import { type IPendingAuthCookie } from "@/typings/auth";
 
 export const PENDING_AUTH_COOKIE = "pending_auth";
 export const AUTH_TOKEN_COOKIE = "auth_token";
-
-export interface IPendingAuthCookie {
-	method: "email" | "phone";
-	otp: string;
-	phone: string;
-	email?: string;
-	token: string;
-}
 
 export function getAuthCookieOptions() {
 	return {

@@ -16,7 +16,7 @@ import { FieldShell } from "@/components/atoms/FieldShell";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
 import { Text } from "@/components/atoms/Text";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 export interface IPhoneCountryOption {
 	code: string;

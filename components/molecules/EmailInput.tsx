@@ -4,7 +4,7 @@ import { forwardRef, InputHTMLAttributes, useId } from "react";
 import { FieldShell } from "@/components/atoms/FieldShell";
 import { Input } from "@/components/atoms/Input";
 import { FormField } from "@/components/molecules/FormField";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 interface IEmailInputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {

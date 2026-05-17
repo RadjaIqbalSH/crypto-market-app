@@ -4,7 +4,7 @@ import { forwardRef, InputHTMLAttributes } from "react";
 import { Search } from "lucide-react";
 import { FieldShell } from "@/components/atoms/FieldShell";
 import { Input } from "@/components/atoms/Input";
-import { cn } from "@/lib/cn";
+import { cn } from "@/helpers/cn";
 
 interface ISearchInputProps
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {

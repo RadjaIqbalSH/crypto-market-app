@@ -1,7 +1,8 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { AUTH_TOKEN_COOKIE, isJwtTokenUsable } from "@/lib/auth";
-import { IMarketApiCoin } from "@/typings/market";
+import { AUTH_TOKEN_COOKIE, isJwtTokenUsable } from "@/auth";
+import { mapMarketCoins } from "@/services/market.service";
+import { type IMarketApiCoin } from "@/typings/market";
 
 interface IMarketListApiResponse {
 	success: boolean;
@@ -26,9 +27,8 @@ export async function GET() {
 		}
 
 		const authorizationToken = authToken as string;
-
 		const response = await fetch(
-			"https://fe-technical-assignment.dxtr.asia/api/v1/list-crypto",
+			`${process.env.NEXT_PUBLIC_API_BASE_URL}/list-crypto`,
 			{
 				cache: "no-store",
 				headers: {
@@ -47,7 +47,7 @@ export async function GET() {
 			return NextResponse.json([], { status: 200 });
 		}
 
-		return NextResponse.json(result.data);
+		return NextResponse.json(mapMarketCoins(result.data));
 	} catch {
 		return NextResponse.json([], { status: 500 });
 	}

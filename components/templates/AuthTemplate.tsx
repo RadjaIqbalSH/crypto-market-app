@@ -12,7 +12,7 @@ export default function AuthTemplate(props: IAuthTemplateProps) {
 	return (
 		<div className="w-full h-dvh bg-bg flex flex-row">
 			<div
-				className="w-1/2 bg-surface flex items-center justify-center"
+				className="relative w-1/2 bg-surface flex items-center justify-center"
 				style={{
 					backgroundImage: "url(/images/bg-decoration.webp)",
 					backgroundSize: "cover",
